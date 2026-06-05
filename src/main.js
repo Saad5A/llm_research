@@ -1,6 +1,7 @@
 import './styles/tokens.css';
 import './styles/typography.css';
 import './styles/layout.css';
+import './styles/components/navigation.css';
 import './styles/components/shared.css';
 import './styles/components/phases.css';
 

@@ -55,7 +55,9 @@ function updateDOM(route) {
   const progress = document.getElementById('navProgress');
   if (progress) {
     const idx = ROUTES.indexOf(route);
-    progress.style.width = `${((idx + 1) / ROUTES.length) * 100}%`;
+    const pct = Math.round(((idx + 1) / ROUTES.length) * 100);
+    progress.style.width = `${pct}%`;
+    progress.setAttribute('aria-valuenow', String(pct));
   }
 
   const crumbs = document.getElementById('breadcrumbs');
