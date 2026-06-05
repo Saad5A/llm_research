@@ -6,29 +6,28 @@ import {
   msUntilNextTransition,
 } from './solar.js';
 
-const MODE_KEY = 'itm-theme-mode';
+const OVERRIDE_KEY = 'itm-theme-override';
 const CACHE_KEY = 'itm-auto-theme-cache';
 
 let scheduleTimer = null;
 let coords = null;
 
-export const THEME_MODES = ['auto', 'light', 'dark'];
-
-export function getThemeMode() {
-  const mode = localStorage.getItem(MODE_KEY);
-  return THEME_MODES.includes(mode) ? mode : 'auto';
-}
-
-export function getActiveTheme() {
-  const mode = getThemeMode();
-  if (mode === 'light') return 'light';
-  if (mode === 'dark') return 'dark';
-  return getAutoTheme();
+function getOverride() {
+  const v = localStorage.getItem(OVERRIDE_KEY);
+  return v === 'light' || v === 'dark' ? v : null;
 }
 
 function getAutoTheme() {
   const c = coords || getStoredGeo() || estimateCoordsFromTimezone();
   return themeFromSun(c.lat, c.lng);
+}
+
+export function hasManualOverride() {
+  return getOverride() !== null;
+}
+
+export function getActiveTheme() {
+  return getOverride() || getAutoTheme();
 }
 
 export function applyTheme(theme) {
@@ -39,31 +38,34 @@ export function applyTheme(theme) {
     theme === 'dark' ? '#0c0c0e' : '#f7f5f0',
   );
 
-  if (getThemeMode() === 'auto') {
+  if (!hasManualOverride()) {
     localStorage.setItem(CACHE_KEY, theme);
   }
 
   window.dispatchEvent(new CustomEvent('themechange', {
-    detail: { theme, mode: getThemeMode() },
+    detail: { theme, manual: hasManualOverride() },
   }));
 }
 
-export function setThemeMode(mode) {
-  localStorage.setItem(MODE_KEY, mode);
-  applyTheme(getActiveTheme());
-  if (mode === 'auto') scheduleNextTransition();
-}
-
 export function toggleTheme() {
-  const mode = getThemeMode();
-  const nextMode = mode === 'auto' ? 'light' : mode === 'light' ? 'dark' : 'auto';
-  setThemeMode(nextMode);
-  return { mode: nextMode, theme: getActiveTheme() };
+  const current = getActiveTheme();
+  const next = current === 'dark' ? 'light' : 'dark';
+  const solar = getAutoTheme();
+
+  if (next === solar) {
+    localStorage.removeItem(OVERRIDE_KEY);
+  } else {
+    localStorage.setItem(OVERRIDE_KEY, next);
+  }
+
+  applyTheme(next);
+  syncScheduler();
+  return next;
 }
 
 function scheduleNextTransition() {
   if (scheduleTimer) clearTimeout(scheduleTimer);
-  if (getThemeMode() !== 'auto') return;
+  if (hasManualOverride()) return;
 
   const c = coords || getStoredGeo() || estimateCoordsFromTimezone();
   const ms = msUntilNextTransition(c.lat, c.lng);
@@ -73,31 +75,48 @@ function scheduleNextTransition() {
   }, ms);
 }
 
-function applyAutoTheme() {
-  if (getThemeMode() !== 'auto') return;
-  applyTheme(getAutoTheme());
-  scheduleNextTransition();
+function syncScheduler() {
+  if (hasManualOverride()) {
+    if (scheduleTimer) clearTimeout(scheduleTimer);
+    scheduleTimer = null;
+  } else {
+    applyTheme(getAutoTheme());
+    scheduleNextTransition();
+  }
+}
+
+function migrateLegacyPrefs() {
+  const legacy = localStorage.getItem('itm-theme-mode');
+  if (!legacy) return;
+  if (legacy === 'light' || legacy === 'dark') {
+    localStorage.setItem(OVERRIDE_KEY, legacy);
+  }
+  localStorage.removeItem('itm-theme-mode');
+  localStorage.removeItem('itm-theme');
 }
 
 export function initTheme() {
-  const cached = localStorage.getItem(CACHE_KEY);
-  const mode = getThemeMode();
+  migrateLegacyPrefs();
 
-  if (mode === 'auto' && cached) {
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (!hasManualOverride() && cached) {
     applyTheme(cached);
   } else {
     applyTheme(getActiveTheme());
   }
 
   coords = getStoredGeo() || estimateCoordsFromTimezone();
-  applyAutoTheme();
+  syncScheduler();
 
   requestGeoLocation().then((c) => {
     coords = c;
-    applyAutoTheme();
+    syncScheduler();
   });
 
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') applyAutoTheme();
+    if (document.visibilityState === 'visible' && !hasManualOverride()) {
+      applyTheme(getAutoTheme());
+      scheduleNextTransition();
+    }
   });
 }

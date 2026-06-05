@@ -1,5 +1,5 @@
 import { ROUTES, navigate, onRouteChange } from '../../services/router.js';
-import { toggleTheme, getActiveTheme, getThemeMode } from '../../services/theme.js';
+import { toggleTheme, getActiveTheme } from '../../services/theme.js';
 
 const FOCUSABLE = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
@@ -29,8 +29,8 @@ export function mountNavigation(root) {
             type="button"
             class="theme-toggle"
             id="themeToggle"
-            aria-label="Cycle theme: automatic, light, or dark"
-            title="Theme: auto (sunset/sunrise), light, or dark"
+            aria-label="Switch theme"
+            title="Switch between light and dark theme"
           >
             <span class="theme-icon" aria-hidden="true"></span>
           </button>
@@ -202,17 +202,12 @@ function trapFocus(e, container) {
 function updateThemeIcon() {
   const icon = document.querySelector('.theme-icon');
   const btn = document.getElementById('themeToggle');
-  if (!icon) return;
+  if (!icon || !btn) return;
 
-  const mode = getThemeMode();
-  if (mode === 'auto') {
-    icon.textContent = '◐';
-    btn?.setAttribute('aria-label', `Automatic theme (${getActiveTheme()} now). Click for light mode.`);
-  } else if (mode === 'light') {
-    icon.textContent = '☀';
-    btn?.setAttribute('aria-label', 'Light theme active. Click for dark mode.');
-  } else {
-    icon.textContent = '☾';
-    btn?.setAttribute('aria-label', 'Dark theme active. Click for automatic sunset theme.');
-  }
+  const theme = getActiveTheme();
+  const next = theme === 'dark' ? 'light' : 'dark';
+
+  icon.textContent = theme === 'dark' ? '☀' : '☾';
+  btn.setAttribute('aria-label', `Switch to ${next} theme`);
+  btn.setAttribute('title', `Switch to ${next} theme`);
 }

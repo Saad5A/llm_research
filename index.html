@@ -8,12 +8,11 @@
   <title>Inside the Models — BERT, Claude &amp; LLaMA</title>
   <script>
     (function () {
-      var mode = localStorage.getItem('itm-theme-mode') || 'auto';
-      var theme;
-      if (mode === 'light') theme = 'light';
-      else if (mode === 'dark') theme = 'dark';
-      else theme = localStorage.getItem('itm-auto-theme-cache')
-        || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var override = localStorage.getItem('itm-theme-override');
+      var theme = (override === 'light' || override === 'dark')
+        ? override
+        : (localStorage.getItem('itm-auto-theme-cache')
+          || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
       document.documentElement.setAttribute('data-theme', theme);
       document.documentElement.style.colorScheme = theme;
     })();
