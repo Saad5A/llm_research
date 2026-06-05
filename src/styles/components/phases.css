@@ -201,9 +201,28 @@
 }
 .bench-filter.active { background: var(--surface2); color: var(--text2); border-color: var(--border2); }
 
-.bench-table        { width: 100%; border-collapse: collapse; font-size: 13px; }
-.bench-table th     { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 500; color: var(--text3); border-bottom: 1px solid var(--border2); letter-spacing: 0.06em; text-transform: uppercase; }
+.bench-table-wrap {
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-x:    auto;
+  overflow-y:    hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+.bench-table-wrap::-webkit-scrollbar       { height: 6px; }
+.bench-table-wrap::-webkit-scrollbar-track { background: transparent; }
+.bench-table-wrap::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.bench-table        { width: 100%; min-width: 580px; border-collapse: collapse; font-size: 13px; }
+.bench-table th     { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 500; color: var(--text3); border-bottom: 1px solid var(--border2); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
 .bench-table td     { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.bench-table th:first-child,
+.bench-table td:first-child { min-width: 148px; }
+.bench-table th:not(:first-child),
+.bench-table td:not(:first-child) { min-width: 152px; }
 .bench-table tr:last-child td { border-bottom: none; }
 .bench-name         { font-weight: 500; color: var(--text); font-size: 13px; }
 .bench-bar-wrap     { display: flex; align-items: center; gap: 8px; }
@@ -399,5 +418,6 @@ pre         { font-family: var(--mono); font-size: 12px; line-height: 1.75; colo
 @media (max-width: 600px) {
   .bench-summary,
   .decision-grid { grid-template-columns: 1fr; }
-  .bench-bar-track { width: 50px; }
+  .bench-table { min-width: 620px; }
+  .bench-bar-track { width: 72px; }
 }
