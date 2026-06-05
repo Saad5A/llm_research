@@ -1,0 +1,13 @@
+# ── Core ML ──────────────────────────────────────────────────
+transformers>=4.40.0
+torch>=2.1.0
+
+# ── BERT / HuggingFace ───────────────────────────────────────
+tokenizers>=0.19.0
+
+# ── LLaMA local inference ────────────────────────────────────
+accelerate>=0.29.0
+bitsandbytes>=0.43.0   # 4-bit quantisation (GPU only)
+
+# ── Claude API ───────────────────────────────────────────────
+anthropic>=0.25.0

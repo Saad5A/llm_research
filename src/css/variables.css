@@ -1,0 +1,48 @@
+/* =============================================================================
+   VARIABLES.CSS — Design tokens for the LLM Research Dashboard
+   All colour, typography, spacing, and radius values live here.
+   ============================================================================= */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg:        #0C0C0E;
+  --bg2:       #141416;
+  --bg3:       #1C1C20;
+  --surface:   #222228;
+  --surface2:  #2A2A32;
+
+  /* ── Borders ── */
+  --border:    rgba(255, 255, 255, 0.07);
+  --border2:   rgba(255, 255, 255, 0.12);
+
+  /* ── Text ── */
+  --text:      #F0EEE8;
+  --text2:     #9E9C96;
+  --text3:     #5A5856;
+
+  /* ── Model brand colours ── */
+  --bert:      #4A9EFF;
+  --bert-dim:  rgba(74, 158, 255, 0.12);
+  --bert-mid:  rgba(74, 158, 255, 0.35);
+
+  --claude:    #2DD4A0;
+  --claude-dim:rgba(45, 212, 160, 0.12);
+  --claude-mid:rgba(45, 212, 160, 0.35);
+
+  --llama:     #FF7A45;
+  --llama-dim: rgba(255, 122, 69, 0.12);
+  --llama-mid: rgba(255, 122, 69, 0.35);
+
+  /* ── Accent (AI Q&A, callouts) ── */
+  --accent:    #C8B8FF;
+  --accent-dim:rgba(200, 184, 255, 0.10);
+
+  /* ── Typography ── */
+  --serif:     'DM Serif Display', Georgia, serif;
+  --sans:      'Instrument Sans', sans-serif;
+  --mono:      'DM Mono', monospace;
+
+  /* ── Radii ── */
+  --radius:    10px;
+  --radius-lg: 16px;
+}

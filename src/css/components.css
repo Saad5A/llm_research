@@ -1,0 +1,214 @@
+/* =============================================================================
+   COMPONENTS.CSS — Shared UI components used across all phases
+   ============================================================================= */
+
+/* ── Navigation ── */
+nav {
+  position:       fixed;
+  top: 0; left: 0; right: 0;
+  z-index:        100;
+  background:     rgba(12, 12, 14, 0.88);
+  backdrop-filter:blur(20px);
+  border-bottom:  1px solid var(--border);
+  padding:        0 2rem;
+  display:        flex;
+  align-items:    center;
+  height:         52px;
+}
+.nav-brand {
+  font-family:  var(--serif);
+  font-size:    16px;
+  color:        var(--text);
+  margin-right: auto;
+  text-decoration: none;
+}
+.nav-links      { display: flex; gap: 2px; flex-wrap: wrap; }
+.nav-link {
+  font-size:      12px;
+  font-family:    var(--mono);
+  color:          var(--text3);
+  padding:        6px 10px;
+  border-radius:  6px;
+  cursor:         pointer;
+  transition:     all 0.15s;
+  border:         none;
+  background:     transparent;
+  letter-spacing: 0.03em;
+}
+.nav-link:hover  { color: var(--text2); background: var(--surface); }
+.nav-link.active { color: var(--text);  background: var(--surface2); }
+.nav-link:disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+.nav-progress {
+  position:   absolute;
+  bottom: 0; left: 0;
+  height:     2px;
+  background: linear-gradient(90deg, var(--bert), var(--claude), var(--llama));
+  transition: width 0.3s ease;
+  width:      0%;
+}
+
+/* ── Hero ── */
+.hero             { padding: 3rem 0 3rem; }
+.hero-subtitle    { font-size: 17px; color: var(--text2); max-width: 540px; line-height: 1.75; margin-top: 1.5rem; }
+.model-tags       { display: flex; gap: 8px; margin-top: 2rem; flex-wrap: wrap; }
+.model-tag        { font-family: var(--mono); font-size: 12px; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.04em; }
+.tag-bert         { background: var(--bert-dim);   color: var(--bert);   border: 1px solid var(--bert-mid); }
+.tag-claude       { background: var(--claude-dim); color: var(--claude); border: 1px solid var(--claude-mid); }
+.tag-llama        { background: var(--llama-dim);  color: var(--llama);  border: 1px solid var(--llama-mid); }
+
+/* ── Card grid ── */
+.intro-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:    12px;
+  margin: 1.5rem 0;
+}
+.intro-card {
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:       1.25rem 1.5rem;
+  transition:    border-color 0.2s;
+}
+.intro-card:hover     { border-color: var(--border2); }
+.intro-card-icon      { font-size: 20px; margin-bottom: 10px; }
+.intro-card-title     { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.intro-card-body      { font-size: 13px; color: var(--text2); line-height: 1.6; margin: 0; }
+
+/* ── Callout ── */
+.callout {
+  background:    var(--accent-dim);
+  border:        1px solid rgba(200, 184, 255, 0.2);
+  border-radius: var(--radius-lg);
+  padding:       1.25rem 1.5rem;
+  margin:        1.5rem 0;
+}
+.callout p        { color: var(--text2); margin: 0; font-size: 14px; line-height: 1.7; }
+.callout strong   { color: var(--accent); }
+
+/* ── Compare strip (3-col) ── */
+.compare-strip {
+  display:               grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:    10px;
+  margin: 1.5rem 0;
+}
+.compare-cell {
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:       1.25rem;
+}
+.compare-model  { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; margin-bottom: 10px; }
+.cm-bert        { color: var(--bert); }
+.cm-claude      { color: var(--claude); }
+.cm-llama       { color: var(--llama); }
+.compare-value  { font-family: var(--serif); font-size: 1.5rem; color: var(--text); margin-bottom: 4px; }
+.compare-label  { font-size: 12px; color: var(--text3); }
+
+/* ── Navigation buttons ── */
+.next-btn {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           8px;
+  background:    var(--surface2);
+  border:        1px solid var(--border2);
+  color:         var(--text);
+  font-family:   var(--sans);
+  font-size:     14px;
+  padding:       12px 24px;
+  border-radius: 8px;
+  cursor:        pointer;
+  transition:    all 0.15s;
+  margin-top:    2.5rem;
+}
+.next-btn:hover          { background: var(--surface); border-color: rgba(255,255,255,0.2); }
+.next-btn .arrow         { transition: transform 0.15s; }
+.next-btn:hover .arrow   { transform: translateX(3px); }
+
+.back-btn {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           8px;
+  background:    transparent;
+  border:        1px solid var(--border);
+  color:         var(--text2);
+  font-family:   var(--sans);
+  font-size:     14px;
+  padding:       12px 24px;
+  border-radius: 8px;
+  cursor:        pointer;
+  transition:    all 0.15s;
+  margin-top:    2.5rem;
+  margin-right:  10px;
+}
+.back-btn:hover  { border-color: var(--border2); color: var(--text); }
+
+/* ── Mode toggle buttons ── */
+.mode-btn {
+  font-size:      11px;
+  font-family:    var(--mono);
+  padding:        5px 12px;
+  border-radius:  20px;
+  border:         1px solid var(--border);
+  background:     transparent;
+  color:          var(--text3);
+  cursor:         pointer;
+  transition:     all 0.15s;
+  letter-spacing: 0.04em;
+}
+.mode-btn.active { background: var(--surface2); color: var(--text2); border-color: var(--border2); }
+
+/* ── Transformer pipeline visual ── */
+.transformer-visual {
+  background:    var(--bg2);
+  border:        1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding:       1.5rem;
+  margin:        1.5rem 0;
+  overflow:      hidden;
+}
+.tf-flow {
+  display:         flex;
+  align-items:     center;
+  gap:             8px;
+  flex-wrap:       wrap;
+  justify-content: center;
+  margin-top:      1rem;
+}
+.tf-block {
+  background:    var(--surface);
+  border:        1px solid var(--border2);
+  border-radius: 8px;
+  padding:       8px 12px;
+  font-size:     12px;
+  font-family:   var(--mono);
+  color:         var(--text2);
+  text-align:    center;
+  min-width:     90px;
+}
+.tf-block.highlight { background: var(--accent-dim); border-color: rgba(200,184,255,0.3); color: var(--accent); }
+.tf-arrow           { color: var(--text3); font-size: 14px; }
+
+/* ── Finish card ── */
+.finish-card {
+  background:    linear-gradient(135deg, var(--bg2) 0%, rgba(200,184,255,0.06) 100%);
+  border:        1px solid rgba(200, 184, 255, 0.15);
+  border-radius: var(--radius-lg);
+  padding:       2rem;
+  margin:        2rem 0;
+  text-align:    center;
+}
+.finish-card h2           { margin-bottom: 0.75rem; }
+.finish-card p            { max-width: 480px; margin: 0 auto 1.5rem; }
+.finish-actions           { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.finish-btn               { font-size: 13px; font-family: var(--mono); padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: all 0.15s; letter-spacing: 0.03em; }
+.fb-primary               { background: var(--accent-dim); border: 1px solid rgba(200,184,255,0.3); color: var(--accent); }
+.fb-primary:hover         { background: rgba(200,184,255,0.2); }
+.fb-secondary             { background: transparent; border: 1px solid var(--border2); color: var(--text2); }
+.fb-secondary:hover       { border-color: var(--border2); color: var(--text); }
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .compare-strip { grid-template-columns: 1fr; }
+}
