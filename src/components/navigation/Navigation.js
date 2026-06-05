@@ -1,7 +1,5 @@
-import { ROUTES, navigate, onRouteChange } from '../../services/router.js';
+import { ROUTES, navigate } from '../../services/router.js';
 import { toggleTheme, getActiveTheme } from '../../services/theme.js';
-
-const FOCUSABLE = 'button:not([disabled]), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 export function mountNavigation(root) {
   const linksHtml = ROUTES.map(r => `
@@ -23,53 +21,40 @@ export function mountNavigation(root) {
           <span class="nav-brand-full">Inside the Models</span>
           <span class="nav-brand-short">ITM</span>
         </a>
+        <div
+          class="nav-progress"
+          id="navProgress"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="Reading progress through guide sections"
+        ></div>
+      </nav>
 
-        <div class="nav-toolbar">
-          <button
-            type="button"
-            class="theme-toggle"
-            id="themeToggle"
-            aria-label="Switch theme"
-            title="Switch between light and dark theme"
-          >
-            <span class="theme-icon" aria-hidden="true"></span>
-          </button>
-          <button
-            type="button"
-            class="nav-toggle"
-            id="navToggle"
-            aria-expanded="false"
-            aria-controls="navPanel"
-            aria-label="Open navigation menu"
-          >
-            <span class="nav-toggle-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <div class="nav-panel" id="navPanel" aria-hidden="true">
+      <div class="nav-subbar">
+        <nav class="nav-panel" id="navPanel" aria-label="Guide sections">
           <ul class="nav-links" id="navLinks">
             ${linksHtml}
           </ul>
-        </div>
-
-        <div class="nav-progress" id="navProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Reading progress through guide sections"></div>
-      </nav>
-
-      <div class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></div>
+        </nav>
+        <button
+          type="button"
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Switch theme"
+          title="Switch between light and dark theme"
+        >
+          <span class="theme-icon" aria-hidden="true"></span>
+        </button>
+      </div>
     </header>
   `;
-
-  const header = root.querySelector('#siteHeader');
-  const toggle = root.querySelector('#navToggle');
-  const panel = root.querySelector('#navPanel');
-
-  const menu = createMobileMenu({ header, toggle, panel });
 
   root.querySelectorAll('[data-nav]').forEach(el => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       navigate(el.dataset.nav);
-      menu.close();
     });
   });
 
@@ -79,147 +64,7 @@ export function mountNavigation(root) {
   });
 
   window.addEventListener('themechange', updateThemeIcon);
-  onRouteChange(() => menu.close());
-  window.addEventListener('resize', () => {
-    if (window.matchMedia('(min-width: 768px)').matches) menu.close();
-  });
-
-  function syncViewportA11y() {
-    if (window.matchMedia('(min-width: 768px)').matches) {
-      panel.setAttribute('aria-hidden', 'false');
-      panel.removeAttribute('inert');
-    } else if (!menu.isOpen) {
-      panel.setAttribute('aria-hidden', 'true');
-      panel.setAttribute('inert', '');
-    }
-  }
-
-  syncViewportA11y();
-  window.addEventListener('resize', syncViewportA11y);
   updateThemeIcon();
-}
-
-function createMobileMenu({ header, toggle, panel }) {
-  let isOpen = false;
-  let lastFocus = null;
-  let touchStartY = 0;
-  let scrollCloseEnabled = false;
-
-  function setA11y(open) {
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
-    panel.setAttribute('aria-hidden', String(!open));
-
-    if (open) {
-      panel.removeAttribute('inert');
-    } else {
-      panel.setAttribute('inert', '');
-    }
-  }
-
-  function bindScrollClose() {
-    window.addEventListener('wheel', onWheel, { passive: true });
-    window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove', onTouchMove, { passive: true });
-  }
-
-  function unbindScrollClose() {
-    window.removeEventListener('wheel', onWheel);
-    window.removeEventListener('touchstart', onTouchStart);
-    window.removeEventListener('touchmove', onTouchMove);
-  }
-
-  function onWheel() {
-    if (isOpen) close();
-  }
-
-  function onTouchStart(e) {
-    if (!isOpen) return;
-    touchStartY = e.touches[0].clientY;
-  }
-
-  function onTouchMove(e) {
-    if (!isOpen || !scrollCloseEnabled) return;
-    const dy = Math.abs(e.touches[0].clientY - touchStartY);
-    if (dy > 8) close();
-  }
-
-  function open() {
-    if (isOpen || !isMobileViewport()) return;
-    isOpen = true;
-    lastFocus = document.activeElement;
-    header.classList.add('is-menu-open');
-    setA11y(true);
-    bindScrollClose();
-    requestAnimationFrame(() => {
-      scrollCloseEnabled = true;
-      panel.querySelector(FOCUSABLE)?.focus();
-    });
-  }
-
-  function close() {
-    if (!isOpen) return;
-    isOpen = false;
-    scrollCloseEnabled = false;
-    header.classList.remove('is-menu-open');
-    unbindScrollClose();
-    if (isMobileViewport()) setA11y(false);
-    if (lastFocus && typeof lastFocus.focus === 'function') {
-      lastFocus.focus();
-    }
-  }
-
-  function toggleMenu() {
-    if (isOpen) close();
-    else open();
-  }
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    toggleMenu();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (!isOpen) return;
-
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      close();
-      return;
-    }
-
-    if (e.key === 'Tab') {
-      trapFocus(e, panel);
-    }
-  });
-
-  return {
-    open,
-    close,
-    get isOpen() { return isOpen; },
-  };
-}
-
-function isMobileViewport() {
-  return window.matchMedia('(max-width: 767px)').matches;
-}
-
-function trapFocus(e, container) {
-  const focusable = [...container.querySelectorAll(FOCUSABLE)].filter(
-    el => el.offsetParent !== null || el === document.activeElement
-  );
-  if (!focusable.length) return;
-
-  const first = focusable[0];
-  const last = focusable[focusable.length - 1];
-
-  if (e.shiftKey && document.activeElement === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    e.preventDefault();
-    first.focus();
-  }
 }
 
 function updateThemeIcon() {

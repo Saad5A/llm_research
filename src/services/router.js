@@ -60,19 +60,6 @@ function updateDOM(route) {
     progress.setAttribute('aria-valuenow', String(pct));
   }
 
-  const crumbs = document.getElementById('breadcrumbs');
-  if (crumbs) {
-    crumbs.innerHTML = `
-      <a href="/intro" data-nav="intro">Home</a>
-      <span class="bc-sep">/</span>
-      <span class="bc-current" aria-current="page">${route.shortLabel}</span>
-    `;
-    crumbs.querySelector('[data-nav]')?.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigate('intro');
-    });
-  }
-
   document.title = `${route.shortLabel} — Inside the Models`;
   window.scrollTo(0, 0);
 }
