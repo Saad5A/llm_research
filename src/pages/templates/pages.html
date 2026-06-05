@@ -4,7 +4,7 @@
     <div class="hero">
       <div class="eyebrow">A guided research project · <span>BERT · Claude · LLaMA</span></div>
       <h1>Inside the<br><em>models</em> that<br>think in text</h1>
-      <p class="hero-subtitle">A deep-dive into three landmark AI models �? how they're built, how they learn, and when to reach for each one.</p>
+      <p class="hero-subtitle">A deep-dive into three landmark AI models — how they're built, how they learn, and when to reach for each one.</p>
       <div class="model-tags">
         <span class="model-tag tag-bert">BERT · Google · 2018</span>
         <span class="model-tag tag-claude">Claude · Anthropic · 2023</span>
@@ -16,25 +16,25 @@
 
     <div class="section-header">
       <span class="section-num">01.1</span>
-      <h2>Why these three models �? </h2>
+      <h2>Why these three models?</h2>
     </div>
-    <p>Not all language models are alike. BERT, Claude, and LLaMA were each built with a fundamentally different purpose �? and together they cover almost the entire landscape of how modern NLP systems are designed and deployed.</p>
+    <p>Not all language models are alike. BERT, Claude, and LLaMA were each built with a fundamentally different purpose — and together they cover almost the entire landscape of how modern NLP systems are designed and deployed.</p>
 
     <div class="intro-grid">
       <div class="intro-card">
-        <div class="intro-card-icon" style="color:var(--bert)">�?</div>
+        <div class="intro-card-icon" style="color:var(--bert)">◈</div>
         <div class="intro-card-title" style="color:var(--bert)">BERT</div>
         <p class="intro-card-body">Google's 2018 breakthrough. Built to <strong>understand</strong> language, not generate it. Still the backbone of most production NLP classification pipelines today.</p>
       </div>
       <div class="intro-card">
-        <div class="intro-card-icon" style="color:var(--claude)">�?</div>
+        <div class="intro-card-icon" style="color:var(--claude)">◈</div>
         <div class="intro-card-title" style="color:var(--claude)">Claude</div>
-        <p class="intro-card-body">Anthropic's safety-first assistant. Built to reason, converse, and follow complex instructions �? with alignment baked into its training through Constitutional AI.</p>
+        <p class="intro-card-body">Anthropic's safety-first assistant. Built to reason, converse, and follow complex instructions — with alignment baked into its training through Constitutional AI.</p>
       </div>
       <div class="intro-card">
-        <div class="intro-card-icon" style="color:var(--llama)">�?</div>
+        <div class="intro-card-icon" style="color:var(--llama)">◈</div>
         <div class="intro-card-title" style="color:var(--llama)">LLaMA</div>
-        <p class="intro-card-body">Meta's open-weight model family. The foundation of the open-source LLM ecosystem �? designed to be studied, fine-tuned, and deployed privately.</p>
+        <p class="intro-card-body">Meta's open-weight model family. The foundation of the open-source LLM ecosystem — designed to be studied, fine-tuned, and deployed privately.</p>
       </div>
     </div>
 
@@ -42,21 +42,21 @@
 
     <div class="section-header">
       <span class="section-num">01.2</span>
-      <h2>What is a transformer �? </h2>
+      <h2>What is a transformer?</h2>
     </div>
-    <p>Every model in this guide is built on the <strong>transformer architecture</strong> �? introduced by Google in the 2017 paper <em>"Attention Is All You Need."</em> Transformers process all words in parallel, using <strong>self-attention</strong> to understand relationships between any two tokens regardless of distance.</p>
+    <p>Every model in this guide is built on the <strong>transformer architecture</strong> — introduced by Google in the 2017 paper <em>"Attention Is All You Need."</em> Transformers process all words in parallel, using <strong>self-attention</strong> to understand relationships between any two tokens regardless of distance.</p>
 
     <div class="transformer-visual">
       <h3>The transformer pipeline</h3>
       <div class="tf-flow">
         <div class="tf-block">Raw text<br><span style="font-size:10px;opacity:.5">"The cat sat"</span></div>
-        <div class="tf-arrow">�?</div>
-        <div class="tf-block">Tokenisation<br><span style="font-size:10px;opacity:.5">[101, 2023, �?]</span></div>
-        <div class="tf-arrow">�?</div>
-        <div class="tf-block highlight">Self-attention<br><span style="font-size:10px;opacity:.7">who relates to who �? </span></div>
-        <div class="tf-arrow">�?</div>
+        <div class="tf-arrow">→</div>
+        <div class="tf-block">Tokenisation<br><span style="font-size:10px;opacity:.5">[101, 2023, …]</span></div>
+        <div class="tf-arrow">→</div>
+        <div class="tf-block highlight">Self-attention<br><span style="font-size:10px;opacity:.7">who relates to who?</span></div>
+        <div class="tf-arrow">→</div>
         <div class="tf-block">Feed-forward<br><span style="font-size:10px;opacity:.5">transform features</span></div>
-        <div class="tf-arrow">�?</div>
+        <div class="tf-arrow">→</div>
         <div class="tf-block">Output<br><span style="font-size:10px;opacity:.5">prediction / text</span></div>
       </div>
     </div>
@@ -75,37 +75,37 @@
       <div class="compare-cell">
         <div class="compare-model cm-bert">02 · Architecture</div>
         <div class="compare-value">How</div>
-        <div class="compare-label">they're structurally built �? encoder, decoder, attention, layers</div>
+        <div class="compare-label">they're structurally built — encoder, decoder, attention, layers</div>
       </div>
       <div class="compare-cell">
         <div class="compare-model cm-claude">03 · Training</div>
         <div class="compare-value">Why</div>
-        <div class="compare-label">they behave differently �? masked LM, RLHF, Constitutional AI</div>
+        <div class="compare-label">they behave differently — masked LM, RLHF, Constitutional AI</div>
       </div>
       <div class="compare-cell">
-        <div class="compare-model cm-llama">04�?06 · Use</div>
+        <div class="compare-model cm-llama">04–06 · Use</div>
         <div class="compare-value">When</div>
-        <div class="compare-label">to reach for each �? benchmarks, code, decision guide</div>
+        <div class="compare-label">to reach for each — benchmarks, code, decision guide</div>
       </div>
     </div>
 
-    <div class="persona-note">Add your personal motivation here �? why did you choose these three models �?  What are you hoping to understand by the end �?  This paragraph is yours to write and will anchor the whole piece for readers who find it on GitHub.</div>
+    <div class="persona-note">Add your personal motivation here — why did you choose these three models? What are you hoping to understand by the end? This paragraph is yours to write and will anchor the whole piece for readers who find it on GitHub.</div>
 
-    <button class="next-btn" onclick="goTo('arch')">Continue to Architecture <span class="arrow">�?</span></button>
+    <button class="next-btn" onclick="goTo('arch')">Continue to Architecture <span class="arrow">→</span></button>
 
   </div>
 </div>
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 2 �? ARCHITECTURE
+     PAGE 2 — ARCHITECTURE
 ══════════════════════════════════════════ -->
 <div class="page" id="page-arch">
   <div class="container">
 
     <div class="eyebrow">Phase <span>02</span> · Architecture deep-dive</div>
     <h2>How each model is <em>actually</em> built</h2>
-    <p>Same foundation �? the transformer �? but radically different designs. The architectural choices made at the start determine everything: what a model can do, how it thinks, and how it's trained.</p>
+    <p>Same foundation — the transformer — but radically different designs. The architectural choices made at the start determine everything: what a model can do, how it thinks, and how it's trained.</p>
 
     <hr class="divider">
     <div class="section-header"><span class="section-num">02.1</span><h2>Pick a model</h2></div>
@@ -123,17 +123,17 @@
         <h3 style="margin-bottom:1rem">BERT's layer stack</h3>
         <div class="layer-stack">
           <div class="layer layer-embed"><span class="layer-label">Input embeddings</span><span class="layer-detail">token + position + segment</span></div>
-          <div class="layer layer-attn"><span class="layer-label">Multi-head self-attention ×12</span><span class="layer-detail">bidirectional �? sees all tokens</span></div>
+          <div class="layer layer-attn"><span class="layer-label">Multi-head self-attention ×12</span><span class="layer-detail">bidirectional — sees all tokens</span></div>
           <div class="layer layer-ff"><span class="layer-label">Feed-forward network ×12</span><span class="layer-detail">hidden size: 3072</span></div>
-          <div class="layer layer-out-bert"><span class="layer-label">Task head (classification / NER)</span><span class="layer-detail">no generation �? understanding only</span></div>
+          <div class="layer layer-out-bert"><span class="layer-label">Task head (classification / NER)</span><span class="layer-detail">no generation — understanding only</span></div>
         </div>
         <div class="arch-key-insight insight-bert">
           <strong>The key insight</strong>
-          BERT reads the entire sentence at once, in both directions simultaneously. This bidirectional context makes it exceptional at understanding �? but it fundamentally cannot generate new text. It has no mechanism for predicting "what comes next."
+          BERT reads the entire sentence at once, in both directions simultaneously. This bidirectional context makes it exceptional at understanding — but it fundamentally cannot generate new text. It has no mechanism for predicting "what comes next."
         </div>
       </div>
       <div class="bidir-visual">
-        <h3>Bidirectional attention �? BERT sees all context</h3>
+        <h3>Bidirectional attention — BERT sees all context</h3>
         <p style="font-size:13px;color:var(--text2);margin-bottom:1rem">When predicting the masked word, BERT attends to tokens on both left and right simultaneously.</p>
         <div class="bidir-row">
           <div class="bidir-token">The</div>
@@ -143,8 +143,8 @@
           <div class="bidir-token">the</div>
           <div class="bidir-token">loan</div>
         </div>
-        <div class="arrow-row" style="margin-top:8px">�? �? �? attends both ways �? �? �?</div>
-        <p style="font-size:12px;color:var(--text3);margin-top:10px;font-family:var(--mono)">Prediction: "guarantee" �? informed by both "bank" (left) and "loan" (right)</p>
+        <div class="arrow-row" style="margin-top:8px">← ← ← attends both ways → → →</div>
+        <p style="font-size:12px;color:var(--text3);margin-top:10px;font-family:var(--mono)">Prediction: "guarantee" — informed by both "bank" (left) and "loan" (right)</p>
       </div>
       <p>BERT-base has <strong>12 transformer layers</strong>, <strong>12 attention heads</strong>, and <strong>110M parameters</strong>. BERT-large scales to 24 layers, 16 heads, and 340M parameters.</p>
     </div>
@@ -163,23 +163,23 @@
         </div>
         <div class="arch-key-insight insight-claude">
           <strong>The key insight</strong>
-          Claude is a decoder �? it generates text one token at a time. What makes it distinctive isn't the base architecture (similar to GPT-style models) but the training: Constitutional AI bakes in values and safety through a self-critique process, not just human feedback labels.
+          Claude is a decoder — it generates text one token at a time. What makes it distinctive isn't the base architecture (similar to GPT-style models) but the training: Constitutional AI bakes in values and safety through a self-critique process, not just human feedback labels.
         </div>
       </div>
       <div class="bidir-visual">
-        <h3>Causal attention �? Claude only sees what came before</h3>
+        <h3>Causal attention — Claude only sees what came before</h3>
         <div class="bidir-row">
           <div class="bidir-token" style="border-color:var(--claude-mid);color:var(--claude)">The</div>
           <div class="bidir-token" style="border-color:var(--claude-mid);color:var(--claude)">sky</div>
           <div class="bidir-token" style="border-color:var(--claude-mid);color:var(--claude)">is</div>
-          <div class="bidir-token masked" style="background:var(--claude-dim);color:var(--claude);border-color:var(--claude-mid)"> �? </div>
-          <div class="bidir-token" style="opacity:.25">�?</div>
-          <div class="bidir-token" style="opacity:.25">�?</div>
+          <div class="bidir-token masked" style="background:var(--claude-dim);color:var(--claude);border-color:var(--claude-mid)">?</div>
+          <div class="bidir-token" style="opacity:.25">—</div>
+          <div class="bidir-token" style="opacity:.25">—</div>
         </div>
-        <div class="arrow-row" style="margin-top:8px">�? �? �? attends only leftward (past tokens)</div>
-        <p style="font-size:12px;color:var(--text3);margin-top:10px;font-family:var(--mono)">Generates: "blue" �? no peek at future tokens</p>
+        <div class="arrow-row" style="margin-top:8px">← ← ← attends only leftward (past tokens)</div>
+        <p style="font-size:12px;color:var(--text3);margin-top:10px;font-family:var(--mono)">Generates: "blue" — no peek at future tokens</p>
       </div>
-      <p>Claude uses <strong>rotary positional embeddings (RoPE)</strong> enabling up to <strong>200K token context</strong>. Training pipeline: pretraining �? SFT �? RLHF �? Constitutional AI critique-revision loops.</p>
+      <p>Claude uses <strong>rotary positional embeddings (RoPE)</strong> enabling up to <strong>200K token context</strong>. Training pipeline: pretraining → SFT → RLHF → Constitutional AI critique-revision loops.</p>
     </div>
 
     <!-- LLaMA -->
@@ -188,8 +188,8 @@
         <span class="arch-badge badge-llama">Decoder-only · Open weights · Efficient</span>
         <h3 style="margin-bottom:1rem">LLaMA's layer stack</h3>
         <div class="layer-stack">
-          <div class="layer layer-embed"><span class="layer-label">Token embeddings</span><span class="layer-detail">no learned positional �? uses RoPE</span></div>
-          <div class="layer layer-mask"><span class="layer-label">Grouped-query attention (GQA)</span><span class="layer-detail">efficient �? fewer KV heads than Q heads</span></div>
+          <div class="layer layer-embed"><span class="layer-label">Token embeddings</span><span class="layer-detail">no learned positional — uses RoPE</span></div>
+          <div class="layer layer-mask"><span class="layer-label">Grouped-query attention (GQA)</span><span class="layer-detail">efficient — fewer KV heads than Q heads</span></div>
           <div class="layer layer-ff"><span class="layer-label">SwiGLU feed-forward</span><span class="layer-detail">activation optimised for efficiency</span></div>
           <div class="layer layer-ff" style="background:rgba(255,122,69,0.05);border-color:rgba(255,122,69,0.15);color:#FFAA80"><span class="layer-label">RMSNorm (pre-normalisation)</span><span class="layer-detail">stabilises training, replaces LayerNorm</span></div>
           <div class="layer layer-out-llama"><span class="layer-label">Token prediction head</span><span class="layer-detail">next-token generation, open for fine-tuning</span></div>
@@ -199,7 +199,7 @@
           LLaMA is architecturally similar to GPT but optimised for efficiency and open use. Grouped-query attention dramatically reduces memory during inference. SwiGLU activations improve performance. The result: competitive with much larger models at a fraction of the compute cost.
         </div>
       </div>
-      <p>LLaMA 3 (2024) ranges from <strong>8B to 405B parameters</strong>. The 8B model runs on a single consumer GPU. Context window: <strong>128K tokens</strong>. Weights are publicly released �? download, inspect, modify, fine-tune on your own hardware.</p>
+      <p>LLaMA 3 (2024) ranges from <strong>8B to 405B parameters</strong>. The 8B model runs on a single consumer GPU. Context window: <strong>128K tokens</strong>. Weights are publicly released — download, inspect, modify, fine-tune on your own hardware.</p>
     </div>
 
     <hr class="divider">
@@ -213,7 +213,7 @@
         <button class="mode-btn"        id="mode-causal-btn" onclick="setAttnMode('causal')">Causal (Claude / LLaMA)</button>
       </div>
       <div class="attn-sentence" id="attnSentence"></div>
-      <div class="attn-info" id="attnInfo">�? Select a word to see what it attends to</div>
+      <div class="attn-info" id="attnInfo">← Select a word to see what it attends to</div>
     </div>
 
     <hr class="divider">
@@ -222,7 +222,7 @@
       <div class="compare-cell">
         <div class="compare-model cm-bert">BERT</div>
         <div class="compare-value" style="font-size:1.1rem;line-height:1.4">Encoder only</div>
-        <div class="compare-label" style="margin-top:8px">Bidirectional · No generation · 512 tokens · 110M�?340M params</div>
+        <div class="compare-label" style="margin-top:8px">Bidirectional · No generation · 512 tokens · 110M–340M params</div>
       </div>
       <div class="compare-cell">
         <div class="compare-model cm-claude">Claude</div>
@@ -232,15 +232,15 @@
       <div class="compare-cell">
         <div class="compare-model cm-llama">LLaMA</div>
         <div class="compare-value" style="font-size:1.1rem;line-height:1.4">Decoder open weights</div>
-        <div class="compare-label" style="margin-top:8px">GQA · SwiGLU · RMSNorm · 128K context · 8B�?405B · Fine-tunable</div>
+        <div class="compare-label" style="margin-top:8px">GQA · SwiGLU · RMSNorm · 128K context · 8B–405B · Fine-tunable</div>
       </div>
     </div>
 
-    <div class="persona-note">After reading this section �? did the encoder vs. decoder distinction click for you �?  What surprised you most �?  Add a short reflection here for your README.</div>
+    <div class="persona-note">After reading this section — did the encoder vs. decoder distinction click for you? What surprised you most? Add a short reflection here for your README.</div>
 
     <div>
-      <button class="back-btn" onclick="goTo('intro')">�? Back</button>
-      <button class="next-btn" onclick="goTo('training')">Continue to Training <span class="arrow">�?</span></button>
+      <button class="back-btn" onclick="goTo('intro')">← Back</button>
+      <button class="next-btn" onclick="goTo('training')">Continue to Training <span class="arrow">→</span></button>
     </div>
 
   </div>
@@ -248,25 +248,25 @@
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 3 �? TRAINING
+     PAGE 3 — TRAINING
 ══════════════════════════════════════════ -->
 <div class="page" id="page-training">
   <div class="container">
 
     <div class="eyebrow">Phase <span>03</span> · Training objectives</div>
     <h2>How each model <em>learns</em></h2>
-    <p>The architecture tells you the shape of the model. The training objective tells you what it actually learns to do �? and why three models built on the same transformer foundation behave so differently.</p>
+    <p>The architecture tells you the shape of the model. The training objective tells you what it actually learns to do — and why three models built on the same transformer foundation behave so differently.</p>
 
     <hr class="divider">
-    <div class="section-header"><span class="section-num">03.1</span><h2>BERT �? Masked Language Modelling</h2></div>
+    <div class="section-header"><span class="section-num">03.1</span><h2>BERT — Masked Language Modelling</h2></div>
 
     <div class="training-card tc-bert">
       <h3 style="color:var(--bert)">BERT · Masked LM + Next Sentence Prediction</h3>
       <div class="obj-title">Fill in the blank,<br>predict the pair</div>
       <div class="training-step"><span class="step-num">01</span><span class="step-text"><strong>Masking:</strong> 15% of input tokens are randomly replaced with [MASK]. The model must predict the original token using only surrounding context.</span></div>
-      <div class="training-step"><span class="step-num">02</span><span class="step-text"><strong>Bidirectional context:</strong> Because BERT sees the whole sentence at once, both left and right context inform every prediction �? unlike earlier left-to-right models.</span></div>
-      <div class="training-step"><span class="step-num">03</span><span class="step-text"><strong>Next Sentence Prediction (NSP):</strong> Given two sentences, BERT also learns to predict whether sentence B naturally follows sentence A �? building paragraph-level understanding.</span></div>
-      <div class="training-step"><span class="step-num">04</span><span class="step-text"><strong>No labels needed:</strong> Both tasks are self-supervised �? the labels come directly from the text itself, enabling training on billions of tokens without any human annotation.</span></div>
+      <div class="training-step"><span class="step-num">02</span><span class="step-text"><strong>Bidirectional context:</strong> Because BERT sees the whole sentence at once, both left and right context inform every prediction — unlike earlier left-to-right models.</span></div>
+      <div class="training-step"><span class="step-num">03</span><span class="step-text"><strong>Next Sentence Prediction (NSP):</strong> Given two sentences, BERT also learns to predict whether sentence B naturally follows sentence A — building paragraph-level understanding.</span></div>
+      <div class="training-step"><span class="step-num">04</span><span class="step-text"><strong>No labels needed:</strong> Both tasks are self-supervised — the labels come directly from the text itself, enabling training on billions of tokens without any human annotation.</span></div>
     </div>
 
     <div class="mlm-demo">
@@ -277,7 +277,7 @@
     </div>
 
     <hr class="divider">
-    <div class="section-header"><span class="section-num">03.2</span><h2>Claude �? RLHF + Constitutional AI</h2></div>
+    <div class="section-header"><span class="section-num">03.2</span><h2>Claude — RLHF + Constitutional AI</h2></div>
 
     <div class="training-card tc-claude">
       <h3 style="color:var(--claude)">Claude · Reinforcement Learning from Human Feedback + Constitutional AI</h3>
@@ -289,18 +289,18 @@
         <div class="rlhf-icon" style="background:var(--bert-dim);color:var(--bert)">1</div>
         <div class="rlhf-content">
           <div class="rlhf-label">Pretraining</div>
-          <div class="rlhf-desc">Train on a massive corpus of text to build general language understanding and generation capability �? the same as any large language model.</div>
+          <div class="rlhf-desc">Train on a massive corpus of text to build general language understanding and generation capability — the same as any large language model.</div>
         </div>
       </div>
-      <div class="rlhf-connector">�?</div>
+      <div class="rlhf-connector">↓</div>
       <div class="rlhf-step">
         <div class="rlhf-icon" style="background:var(--accent-dim);color:var(--accent)">2</div>
         <div class="rlhf-content">
           <div class="rlhf-label">Supervised Fine-Tuning (SFT)</div>
-          <div class="rlhf-desc">Fine-tune on human-written examples of ideal responses �? helpful, harmless, honest conversations across a wide variety of tasks.</div>
+          <div class="rlhf-desc">Fine-tune on human-written examples of ideal responses — helpful, harmless, honest conversations across a wide variety of tasks.</div>
         </div>
       </div>
-      <div class="rlhf-connector">�?</div>
+      <div class="rlhf-connector">↓</div>
       <div class="rlhf-step">
         <div class="rlhf-icon" style="background:rgba(255,122,69,0.1);color:var(--llama)">3</div>
         <div class="rlhf-content">
@@ -308,20 +308,20 @@
           <div class="rlhf-desc">Human raters compare pairs of model outputs and rank them. These preferences train a separate reward model that scores response quality.</div>
         </div>
       </div>
-      <div class="rlhf-connector">�?</div>
+      <div class="rlhf-connector">↓</div>
       <div class="rlhf-step">
         <div class="rlhf-icon" style="background:var(--claude-dim);color:var(--claude)">4</div>
         <div class="rlhf-content">
           <div class="rlhf-label">Reinforcement Learning (PPO)</div>
-          <div class="rlhf-desc">Use the reward model to fine-tune the LLM via Proximal Policy Optimisation �? maximising the reward signal while staying close to the SFT policy.</div>
+          <div class="rlhf-desc">Use the reward model to fine-tune the LLM via Proximal Policy Optimisation — maximising the reward signal while staying close to the SFT policy.</div>
         </div>
       </div>
-      <div class="rlhf-connector">�?</div>
+      <div class="rlhf-connector">↓</div>
       <div class="rlhf-step">
         <div class="rlhf-icon" style="background:var(--claude-dim);color:var(--claude)">5</div>
         <div class="rlhf-content">
           <div class="rlhf-label">Constitutional AI (Anthropic-specific)</div>
-          <div class="rlhf-desc">The model critiques and revises its own outputs against a written set of principles �? reducing reliance on human feedback for safety, and making the values transparent and auditable.</div>
+          <div class="rlhf-desc">The model critiques and revises its own outputs against a written set of principles — reducing reliance on human feedback for safety, and making the values transparent and auditable.</div>
         </div>
       </div>
     </div>
@@ -335,22 +335,22 @@
     </div>
 
     <hr class="divider">
-    <div class="section-header"><span class="section-num">03.3</span><h2>LLaMA �? Causal Language Modelling at scale</h2></div>
+    <div class="section-header"><span class="section-num">03.3</span><h2>LLaMA — Causal Language Modelling at scale</h2></div>
 
     <div class="training-card tc-llama">
       <h3 style="color:var(--llama)">LLaMA · Next-token prediction · 15 trillion tokens</h3>
       <div class="obj-title">Predict what comes next,<br>at massive scale</div>
-      <div class="training-step"><span class="step-num">01</span><span class="step-text"><strong>Causal LM objective:</strong> Given a sequence of tokens, predict the next one. Simple, but applied over 15 trillion tokens of diverse text �? books, code, web, scientific papers.</span></div>
-      <div class="training-step"><span class="step-num">02</span><span class="step-text"><strong>Efficiency first:</strong> LLaMA was designed to be maximally capable within a given compute budget �? smaller models trained on more data, informed by the Chinchilla scaling laws.</span></div>
+      <div class="training-step"><span class="step-num">01</span><span class="step-text"><strong>Causal LM objective:</strong> Given a sequence of tokens, predict the next one. Simple, but applied over 15 trillion tokens of diverse text — books, code, web, scientific papers.</span></div>
+      <div class="training-step"><span class="step-num">02</span><span class="step-text"><strong>Efficiency first:</strong> LLaMA was designed to be maximally capable within a given compute budget — smaller models trained on more data, informed by the Chinchilla scaling laws.</span></div>
       <div class="training-step"><span class="step-num">03</span><span class="step-text"><strong>Open weights:</strong> Meta releases the trained weights publicly. The community fine-tunes them with instruction datasets (Alpaca, ShareGPT) to create instruction-following variants.</span></div>
-      <div class="training-step"><span class="step-num">04</span><span class="step-text"><strong>No alignment by default:</strong> Base LLaMA is a raw language model. Safety and alignment are the responsibility of whoever fine-tunes it �? a deliberate choice enabling research freedom.</span></div>
+      <div class="training-step"><span class="step-num">04</span><span class="step-text"><strong>No alignment by default:</strong> Base LLaMA is a raw language model. Safety and alignment are the responsibility of whoever fine-tunes it — a deliberate choice enabling research freedom.</span></div>
     </div>
 
-    <div class="persona-note">Which training approach resonates most with you �? BERT's elegant self-supervision, Claude's explicit value encoding, or LLaMA's "scale and release" philosophy �?  Add your take here.</div>
+    <div class="persona-note">Which training approach resonates most with you — BERT's elegant self-supervision, Claude's explicit value encoding, or LLaMA's "scale and release" philosophy? Add your take here.</div>
 
     <div>
-      <button class="back-btn" onclick="goTo('arch')">�? Back</button>
-      <button class="next-btn" onclick="goTo('benchmarks')">Continue to Benchmarks <span class="arrow">�?</span></button>
+      <button class="back-btn" onclick="goTo('arch')">← Back</button>
+      <button class="next-btn" onclick="goTo('benchmarks')">Continue to Benchmarks <span class="arrow">→</span></button>
     </div>
 
   </div>
@@ -358,14 +358,14 @@
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 4 �? BENCHMARKS
+     PAGE 4 — BENCHMARKS
 ══════════════════════════════════════════ -->
 <div class="page" id="page-benchmarks">
   <div class="container">
 
     <div class="eyebrow">Phase <span>04</span> · Benchmarks &amp; performance</div>
-    <h2>How do they <em>actually</em> perform �? </h2>
-    <p>Benchmarks give us a standardised language for comparing models across tasks. But they also have limits �? a model that tops every leaderboard may still fail on your specific use case. Read the numbers, then read the caveats.</p>
+    <h2>How do they <em>actually</em> perform?</h2>
+    <p>Benchmarks give us a standardised language for comparing models across tasks. But they also have limits — a model that tops every leaderboard may still fail on your specific use case. Read the numbers, then read the caveats.</p>
 
     <hr class="divider">
     <div class="section-header"><span class="section-num">04.1</span><h2>Best-in-class scores</h2></div>
@@ -415,14 +415,14 @@
     <p class="bench-note">Scores are representative published values. BERT scores of 0 indicate the task requires generation capability BERT doesn't have. Claude scores reflect Claude 3 Opus/Sonnet range. LLaMA scores reflect LLaMA 3 70B.</p>
 
     <div class="callout" style="margin-top:2rem">
-      <p><strong>The benchmark trap:</strong> A model that scores 90 on MMLU may still hallucinate confidently, refuse reasonable requests, or perform poorly on your domain. Benchmarks measure average capability across curated test sets �? they don't measure reliability, safety, or fit-for-purpose. Always test on your own data.</p>
+      <p><strong>The benchmark trap:</strong> A model that scores 90 on MMLU may still hallucinate confidently, refuse reasonable requests, or perform poorly on your domain. Benchmarks measure average capability across curated test sets — they don't measure reliability, safety, or fit-for-purpose. Always test on your own data.</p>
     </div>
 
-    <div class="persona-note">Which benchmark result surprised you most �?  Were there any results that changed how you'd choose between these models �?  Add your observation here.</div>
+    <div class="persona-note">Which benchmark result surprised you most? Were there any results that changed how you'd choose between these models? Add your observation here.</div>
 
     <div>
-      <button class="back-btn" onclick="goTo('training')">�? Back</button>
-      <button class="next-btn" onclick="goTo('code')">Continue to Code Examples <span class="arrow">�?</span></button>
+      <button class="back-btn" onclick="goTo('training')">← Back</button>
+      <button class="next-btn" onclick="goTo('code')">Continue to Code Examples <span class="arrow">→</span></button>
     </div>
 
   </div>
@@ -430,7 +430,7 @@
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 5 �? CODE EXAMPLES
+     PAGE 5 — CODE EXAMPLES
 ══════════════════════════════════════════ -->
 <div class="page" id="page-code">
   <div class="container">
@@ -450,7 +450,7 @@
 
     <!-- BERT Sentiment -->
     <div class="code-panel visible" id="code-panel-bert-sentiment">
-      <p class="code-desc"><strong>BERT sentiment classifier</strong> �? Fine-tuned on SST-2 (movie reviews). The <code>pipeline</code> abstraction handles tokenisation, inference, and decoding automatically. Best for: product reviews, social media monitoring, support ticket triage.</p>
+      <p class="code-desc"><strong>BERT sentiment classifier</strong> — Fine-tuned on SST-2 (movie reviews). The <code>pipeline</code> abstraction handles tokenisation, inference, and decoding automatically. Best for: product reviews, social media monitoring, support ticket triage.</p>
       <div class="code-block">
         <button class="copy-btn">copy</button>
 <pre><span class="cm"># pip install transformers torch</span>
@@ -472,24 +472,24 @@
 <span class="co">results</span> = classifier(texts)
 
 <span class="kw">for</span> text, result <span class="kw">in</span> <span class="fn">zip</span>(texts, results):
-    <span class="fn">print</span>(<span class="st">f"Text:  {text[:50]}�?"</span>)
+    <span class="fn">print</span>(<span class="st">f"Text:  {text[:50]}…"</span>)
     <span class="fn">print</span>(<span class="st">f"Label: {result['label']}  Score: {result['score']:.3f}\n"</span>)
 </pre>
       </div>
-      <div class="code-output">Text:  The transformer architecture was a genuine�?
+      <div class="code-output">Text:  The transformer architecture was a genuine…
 Label: POSITIVE  Score: 0.998
 
-Text:  I couldn't get the model to run at all�?
+Text:  I couldn't get the model to run at all…
 Label: NEGATIVE  Score: 0.994
 
-Text:  It's an interesting paper but the results�?
+Text:  It's an interesting paper but the results…
 Label: NEGATIVE  Score: 0.721</div>
-      <div class="persona-note">Run this on a dataset relevant to your project �? news headlines, tweets, paper abstracts. Paste your real results and observations here.</div>
+      <div class="persona-note">Run this on a dataset relevant to your project — news headlines, tweets, paper abstracts. Paste your real results and observations here.</div>
     </div>
 
     <!-- BERT NER -->
     <div class="code-panel" id="code-panel-bert-ner">
-      <p class="code-desc"><strong>BERT Named Entity Recognition</strong> �? Identifies people, organisations, locations, and dates in text. BERT is state-of-the-art for this task because bidirectional context is essential for resolving ambiguous entity boundaries.</p>
+      <p class="code-desc"><strong>BERT Named Entity Recognition</strong> — Identifies people, organisations, locations, and dates in text. BERT is state-of-the-art for this task because bidirectional context is essential for resolving ambiguous entity boundaries.</p>
       <div class="code-block">
         <button class="copy-btn">copy</button>
 <pre><span class="cm"># pip install transformers torch</span>
@@ -522,12 +522,12 @@ Dario Amodei          type=PER   score=0.996
 Daniela Amodei        type=PER   score=0.994
 San Francisco         type=LOC   score=0.997
 Claude                type=MISC  score=0.872</div>
-      <div class="persona-note">Try running NER on a domain-specific text �? a research abstract, a news article from your field. Are there entity types it misses �?  Add your findings here.</div>
+      <div class="persona-note">Try running NER on a domain-specific text — a research abstract, a news article from your field. Are there entity types it misses? Add your findings here.</div>
     </div>
 
     <!-- Claude API -->
     <div class="code-panel" id="code-panel-claude-api">
-      <p class="code-desc"><strong>Claude via Anthropic SDK</strong> �? Structured reasoning with JSON output. Claude's long context and instruction-following make it ideal for analysis tasks that require nuanced judgment, not just classification. The <code>system</code> prompt controls persona and output format.</p>
+      <p class="code-desc"><strong>Claude via Anthropic SDK</strong> — Structured reasoning with JSON output. Claude's long context and instruction-following make it ideal for analysis tasks that require nuanced judgment, not just classification. The <code>system</code> prompt controls persona and output format.</p>
       <div class="code-block">
         <button class="copy-btn">copy</button>
 <pre><span class="cm"># pip install anthropic</span>
@@ -565,12 +565,12 @@ abstract and return ONLY valid JSON with these keys:
   "models_mentioned": ["transformer", "attention mechanism"],
   "confidence": 0.87
 }</div>
-      <div class="persona-note">Try modifying the system prompt to extract different fields �? methodology, limitations, or future work. What happens when the abstract is ambiguous �?  Document your observations here.</div>
+      <div class="persona-note">Try modifying the system prompt to extract different fields — methodology, limitations, or future work. What happens when the abstract is ambiguous? Document your observations here.</div>
     </div>
 
     <!-- LLaMA Local -->
     <div class="code-panel" id="code-panel-llama-local">
-      <p class="code-desc"><strong>LLaMA 3 running locally</strong> �? 4-bit quantisation via bitsandbytes lets you run an 8B model on a single 8GB GPU (or ~12GB RAM on CPU). This is the key advantage of open weights: no API calls, no data leaving your machine, full customisation.</p>
+      <p class="code-desc"><strong>LLaMA 3 running locally</strong> — 4-bit quantisation via bitsandbytes lets you run an 8B model on a single 8GB GPU (or ~12GB RAM on CPU). This is the key advantage of open weights: no API calls, no data leaving your machine, full customisation.</p>
       <div class="code-block">
         <button class="copy-btn">copy</button>
 <pre><span class="cm"># pip install transformers torch accelerate bitsandbytes</span>
@@ -582,7 +582,7 @@ abstract and return ONLY valid JSON with these keys:
     pipeline,
 )
 
-<span class="cm"># 4-bit quantisation �? runs on ~8GB VRAM</span>
+<span class="cm"># 4-bit quantisation — runs on ~8GB VRAM</span>
 <span class="co">bnb_config</span> = BitsAndBytesConfig(
     load_in_4bit=<span class="kw">True</span>,
     bnb_4bit_compute_dtype=torch.float16,
@@ -619,12 +619,12 @@ trained with causal language modelling to generate coherent text.
 The key distinction is that BERT excels at tasks requiring deep
 text understanding, whereas LLaMA is designed for text generation
 and can be fine-tuned for a wide range of generative applications.</div>
-      <div class="persona-note">Run this locally if you have the hardware �? even CPU inference is possible for short prompts. Try asking it about this project. Paste the actual output here and compare it to Claude's response on the same prompt.</div>
+      <div class="persona-note">Run this locally if you have the hardware — even CPU inference is possible for short prompts. Try asking it about this project. Paste the actual output here and compare it to Claude's response on the same prompt.</div>
     </div>
 
     <div>
-      <button class="back-btn" onclick="goTo('benchmarks')">�? Back</button>
-      <button class="next-btn" onclick="goTo('guide')">Continue to Decision Guide <span class="arrow">�?</span></button>
+      <button class="back-btn" onclick="goTo('benchmarks')">← Back</button>
+      <button class="next-btn" onclick="goTo('guide')">Continue to Decision Guide <span class="arrow">→</span></button>
     </div>
 
   </div>
@@ -632,14 +632,14 @@ and can be fine-tuned for a wide range of generative applications.</div>
 
 
 <!-- ══════════════════════════════════════════
-     PAGE 6 �? WHEN TO USE / DECISION GUIDE
+     PAGE 6 — WHEN TO USE / DECISION GUIDE
 ══════════════════════════════════════════ -->
 <div class="page" id="page-guide">
   <div class="container">
 
     <div class="eyebrow">Phase <span>06</span> · Decision guide</div>
     <h2>When to reach for <em>each</em> model</h2>
-    <p>The right model depends entirely on your task. Here's a practical guide �? and an interactive decision flow to help you choose.</p>
+    <p>The right model depends entirely on your task. Here's a practical guide — and an interactive decision flow to help you choose.</p>
 
     <hr class="divider">
     <div class="section-header"><span class="section-num">06.1</span><h2>Quick reference</h2></div>
@@ -683,36 +683,36 @@ and can be fine-tuned for a wide range of generative applications.</div>
 
     <hr class="divider">
     <div class="section-header"><span class="section-num">06.3</span><h2>Ask the AI <em>directly</em></h2></div>
-    <p>Still unsure �?  Ask the embedded research assistant �? powered by Claude �? any question about BERT, Claude, or LLaMA.</p>
+    <p>Still unsure? Ask the embedded research assistant — powered by Claude — any question about BERT, Claude, or LLaMA.</p>
 
     <div class="qa-box">
       <div class="qa-chips">
-        <button class="qa-chip" onclick="setChip('What makes BERT better than LLaMA for classification tasks �? ')">BERT vs LLaMA for classification</button>
-        <button class="qa-chip" onclick="setChip('How does Constitutional AI make Claude different from other LLMs �? ')">Constitutional AI explained</button>
-        <button class="qa-chip" onclick="setChip('Can I fine-tune Claude like I can fine-tune LLaMA �? ')">Fine-tuning Claude vs LLaMA</button>
+        <button class="qa-chip" onclick="setChip('What makes BERT better than LLaMA for classification tasks?')">BERT vs LLaMA for classification</button>
+        <button class="qa-chip" onclick="setChip('How does Constitutional AI make Claude different from other LLMs?')">Constitutional AI explained</button>
+        <button class="qa-chip" onclick="setChip('Can I fine-tune Claude like I can fine-tune LLaMA?')">Fine-tuning Claude vs LLaMA</button>
       </div>
       <div class="qa-messages" id="qaMessages">
-        <div class="qa-msg assistant">Hi! Ask me anything about BERT, Claude, or LLaMA �? architecture, training, benchmarks, or when to use each.</div>
+        <div class="qa-msg assistant">Hi! Ask me anything about BERT, Claude, or LLaMA — architecture, training, benchmarks, or when to use each.</div>
       </div>
       <div class="qa-input-row">
-        <input class="qa-input" id="qaInput" type="text" placeholder="Ask a question about any of the three models�?">
-        <button class="qa-send" id="qaSend" onclick="sendQA()">Ask �?</button>
+        <input class="qa-input" id="qaInput" type="text" placeholder="Ask a question about any of the three models…">
+        <button class="qa-send" id="qaSend" onclick="sendQA()">Ask →</button>
       </div>
     </div>
 
-    <div class="persona-note">After completing the full guide �? what's your overall takeaway �?  Which model are you most interested in exploring further, and why �?  Write your conclusion here. This becomes the final section of your GitHub README.</div>
+    <div class="persona-note">After completing the full guide — what's your overall takeaway? Which model are you most interested in exploring further, and why? Write your conclusion here. This becomes the final section of your GitHub README.</div>
 
     <div class="finish-card">
-      <h2>You've reached the end �?</h2>
-      <p>You now have a solid mental model of how BERT, Claude, and LLaMA differ �? architecturally, in training, in benchmarks, and in practice. The next step is yours.</p>
+      <h2>You've reached the end ✦</h2>
+      <p>You now have a solid mental model of how BERT, Claude, and LLaMA differ — architecturally, in training, in benchmarks, and in practice. The next step is yours.</p>
       <div class="finish-actions">
-        <button class="finish-btn fb-primary" onclick="goTo('intro')">�? Read from the start</button>
+        <button class="finish-btn fb-primary" onclick="goTo('intro')">↩ Read from the start</button>
         <button class="finish-btn fb-secondary" onclick="goTo('arch')">Review architecture</button>
         <button class="finish-btn fb-secondary" onclick="goTo('code')">Back to code</button>
       </div>
     </div>
 
-    <button class="back-btn" onclick="goTo('code')">�? Back to Code</button>
+    <button class="back-btn" onclick="goTo('code')">← Back to Code</button>
 
   </div>
 </div>
