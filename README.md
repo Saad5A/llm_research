@@ -8,52 +8,84 @@ A guided, interactive research dashboard comparing three landmark AI models: **B
 
 ## Live Demo
 
-Open `index.html` in any modern browser — no build step, no server required for the dashboard.
+**Inside the Models: An Interactive AI Systems Research Platform**
 
-> **Note:** The embedded Claude Q&A (Phase 6) requires the Anthropic API. To enable it, serve the project via a local server:
-> ```bash
-> npx serve .
-> # or
-> python -m http.server 8080
-> ```
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build → dist/
+npm run preview  # preview production build
+```
+
+> **Note:** The embedded Claude Q&A (Phase 6) calls the Anthropic API from the browser and requires a proxy/API key setup for production use.
+
+### Deploy to Cloudflare Pages
+
+1. Connect [github.com/Saad5A/llm_research](https://github.com/Saad5A/llm_research) in the Cloudflare Pages dashboard.
+2. Configure:
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Node version:** 20+
+3. SPA routing is handled via `public/_redirects`.
+4. Add a custom domain under **Pages → Custom domains** when ready.
 
 ---
 
-## Project Structure
+## Project Structure (Stage 1)
 
 ```
-llm-research/
-├── index.html                  # Main single-page app (all 6 phases)
-├── README.md
-├── requirements.txt            # Python dependencies
+llm-research-project/
+├── index.html                  # Vite entry shell
+├── package.json
+├── vite.config.js
+├── public/                     # Static assets + Cloudflare _redirects
+├── requirements.txt            # Python experiment dependencies
 │
 ├── src/
-│   ├── css/
-│   │   ├── variables.css       # Design tokens (colours, fonts, radii)
-│   │   ├── base.css            # Reset, typography, layout primitives
-│   │   ├── components.css      # Shared UI components (nav, cards, buttons)
-│   │   └── phases.css          # Phase-specific styles (arch, training, etc.)
-│   │
-│   ├── js/
-│   │   ├── main.js             # App entry point — initialises all modules
-│   │   ├── nav.js              # Page routing and progress bar
-│   │   ├── arch.js             # Architecture tabs + attention demo
-│   │   ├── training.js         # MLM masking demo
-│   │   ├── benchmarks.js       # Filterable benchmark table
-│   │   └── guide.js            # Decision flow + Claude-powered Q&A
-│   │
-│   └── pages/
-│       └── _head.html          # Shared <head> partial (reference only)
+│   ├── main.js                 # App bootstrap
+│   ├── assets/                 # images, icons, animations
+│   ├── components/
+│   │   ├── navigation/         # Nav, breadcrumbs, theme toggle
+│   │   ├── code-viewer/        # Copy + tab switching
+│   │   ├── cards/              # (Stage 2)
+│   │   ├── charts/             # (Stage 2)
+│   │   └── modals/             # (Stage 2)
+│   ├── pages/
+│   │   ├── intro/
+│   │   ├── architecture/       # Attention demo
+│   │   ├── training/           # MLM demo
+│   │   ├── benchmarks/         # Filterable table
+│   │   ├── examples/           # Code snippets
+│   │   └── guide/              # Decision flow + Q&A
+│   ├── data/
+│   │   ├── models.json
+│   │   ├── benchmarks.json
+│   │   ├── citations.json
+│   │   └── glossary.json
+│   ├── services/
+│   │   ├── router.js           # Deep linking + keyboard nav
+│   │   ├── loader.js           # JSON data layer
+│   │   ├── theme.js            # Light/dark + persistence
+│   │   └── analytics.js        # Local pageview tracking
+│   └── styles/
+│       ├── tokens.css          # Design system
+│       ├── typography.css
+│       ├── layout.css
+│       └── components/
 │
 └── python/
     ├── bert/
-    │   ├── bert_sentiment.py   # Sentiment classification with BERT
-    │   └── bert_ner.py         # Named Entity Recognition with BERT
     ├── claude/
-    │   └── claude_analysis.py  # Structured abstract analysis via Claude API
     └── llama/
-        └── llama_local.py      # Local inference with LLaMA 3 (4-bit quant)
 ```
+
+### Stage 1 Features
+
+- **Design tokens** — spacing, radii, shadows, motion, semantic colours
+- **Light + dark themes** — system preference, localStorage persistence, no flash
+- **Router** — `/intro`, `/architecture`, `/training`, `/benchmarks`, `/examples`, `/guide`
+- **Keyboard navigation** — `←` / `→` to move between phases
+- **Data layer** — benchmarks, models, citations, glossary in JSON
 
 ---
 

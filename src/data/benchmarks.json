@@ -1,0 +1,30 @@
+{
+  "summary": [
+    { "model": "bert", "score": 94.9, "label": "BERT · SST-2", "task": "Sentiment classification" },
+    { "model": "claude", "score": 88.7, "label": "Claude · MMLU", "task": "Multitask reasoning" },
+    { "model": "llama", "score": 79.3, "label": "LLaMA 3 · MMLU", "task": "Multitask reasoning" }
+  ],
+  "filters": [
+    { "id": "all", "label": "All" },
+    { "id": "understanding", "label": "Understanding" },
+    { "id": "reasoning", "label": "Reasoning" },
+    { "id": "code", "label": "Code" },
+    { "id": "generation", "label": "Generation" }
+  ],
+  "benchmarks": [
+    { "name": "GLUE", "category": "understanding", "bert": 82.1, "claude": 89.4, "llama": 85.2, "winner": "claude", "note": "General Language Understanding Evaluation — 9 NLP tasks" },
+    { "name": "SuperGLUE", "category": "understanding", "bert": 71.5, "claude": 90.1, "llama": 84.7, "winner": "claude", "note": "Harder version of GLUE with more complex tasks" },
+    { "name": "SQuAD 2.0", "category": "understanding", "bert": 86.7, "claude": 91.2, "llama": 88.3, "winner": "claude", "note": "Extractive reading comprehension with unanswerable questions" },
+    { "name": "NER (CoNLL)", "category": "understanding", "bert": 92.4, "claude": 88.1, "llama": 83.6, "winner": "bert", "note": "Named Entity Recognition — BERT's home turf" },
+    { "name": "SST-2", "category": "understanding", "bert": 94.9, "claude": 96.1, "llama": 93.4, "winner": "claude", "note": "Stanford Sentiment Treebank — binary sentiment classification" },
+    { "name": "MMLU", "category": "reasoning", "bert": 42.0, "claude": 88.7, "llama": 79.3, "winner": "claude", "note": "Massive Multitask Language Understanding — 57 subjects" },
+    { "name": "HellaSwag", "category": "reasoning", "bert": 48.3, "claude": 95.3, "llama": 88.2, "winner": "claude", "note": "Commonsense NLI — completing plausible sentences" },
+    { "name": "ARC-C", "category": "reasoning", "bert": 44.1, "claude": 90.2, "llama": 80.1, "winner": "claude", "note": "AI2 Reasoning Challenge — grade school science questions" },
+    { "name": "BoolQ", "category": "reasoning", "bert": 77.4, "claude": 91.0, "llama": 84.6, "winner": "claude", "note": "Boolean yes/no questions with reading passage" },
+    { "name": "HumanEval", "category": "code", "bert": 0.0, "claude": 81.2, "llama": 62.4, "winner": "claude", "note": "Python function synthesis from docstrings — 164 problems" },
+    { "name": "MBPP", "category": "code", "bert": 0.0, "claude": 77.8, "llama": 58.3, "winner": "claude", "note": "Mostly Basic Python Programming — 374 tasks" },
+    { "name": "MT-Bench", "category": "generation", "bert": 0.0, "claude": 8.9, "llama": 7.3, "winner": "claude", "note": "Multi-turn conversation quality — scored 1–10" },
+    { "name": "AlpacaEval", "category": "generation", "bert": 0.0, "claude": 89.5, "llama": 71.4, "winner": "claude", "note": "Instruction-following win rate vs GPT-4-Turbo reference" }
+  ],
+  "note": "Scores are representative published values. BERT scores of 0 indicate the task requires generation capability BERT doesn't have. Claude scores reflect Claude 3 Opus/Sonnet range. LLaMA scores reflect LLaMA 3 70B."
+}

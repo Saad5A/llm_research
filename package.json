@@ -1,0 +1,16 @@
+{
+  "name": "inside-the-models",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Inside the Models — Interactive AI Systems Research Platform",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "validate": "vite build && echo Build validation passed."
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

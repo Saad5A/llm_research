@@ -1,0 +1,16 @@
+{
+  "terms": [
+    { "term": "Transformer", "definition": "Neural architecture using self-attention to process all tokens in parallel. Foundation of BERT, Claude, and LLaMA.", "tags": ["foundations", "architecture"] },
+    { "term": "Self-attention", "definition": "Mechanism where each token computes relevance scores against every other token to build contextual representations.", "tags": ["architecture", "attention"] },
+    { "term": "Encoder", "definition": "Transformer half designed for understanding input bidirectionally. BERT uses encoder-only stacks.", "tags": ["bert", "architecture"] },
+    { "term": "Decoder", "definition": "Transformer half designed for autoregressive generation with causal masking. Used by Claude and LLaMA.", "tags": ["claude", "llama", "architecture"] },
+    { "term": "Masked Language Modelling (MLM)", "definition": "BERT's pretraining objective: predict randomly masked tokens using bidirectional context.", "tags": ["bert", "training"] },
+    { "term": "RLHF", "definition": "Reinforcement Learning from Human Feedback — aligns models using human preference rankings and reward models.", "tags": ["claude", "training", "alignment"] },
+    { "term": "Constitutional AI", "definition": "Anthropic's method where models critique and revise outputs against written principles, reducing harmful responses.", "tags": ["claude", "alignment"] },
+    { "term": "Causal LM", "definition": "Next-token prediction objective used by decoder models. Each token only attends to prior tokens.", "tags": ["llama", "claude", "training"] },
+    { "term": "GQA", "definition": "Grouped-Query Attention — LLaMA's efficient attention variant with fewer key-value heads than query heads.", "tags": ["llama", "architecture"] },
+    { "term": "MMLU", "definition": "Massive Multitask Language Understanding — benchmark spanning 57 academic subjects for reasoning evaluation.", "tags": ["benchmarks", "reasoning"] },
+    { "term": "HumanEval", "definition": "Code generation benchmark with 164 Python programming problems evaluated by unit tests.", "tags": ["benchmarks", "code"] },
+    { "term": "RoPE", "definition": "Rotary Positional Embeddings — encodes token position via rotation in embedding space, enabling long contexts.", "tags": ["claude", "llama", "architecture"] }
+  ]
+}

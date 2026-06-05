@@ -1,0 +1,63 @@
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.eyebrow span { color: var(--color-accent); }
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+h1 em { font-style: italic; color: var(--color-accent); }
+
+h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  color: var(--color-text);
+  margin-bottom: var(--space-md);
+}
+
+h2 em { font-style: italic; }
+
+h3 {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+p:last-child { margin-bottom: 0; }
+strong { color: var(--color-text); font-weight: 500; }
+
+.bench-note {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}

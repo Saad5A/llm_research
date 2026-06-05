@@ -1,0 +1,48 @@
+{
+  "papers": [
+    {
+      "id": "attention",
+      "title": "Attention Is All You Need",
+      "authors": "Vaswani et al.",
+      "year": 2017,
+      "url": "https://arxiv.org/abs/1706.03762",
+      "tags": ["transformer", "architecture", "foundations"]
+    },
+    {
+      "id": "bert",
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+      "authors": "Devlin et al.",
+      "year": 2018,
+      "url": "https://arxiv.org/abs/1810.04805",
+      "tags": ["bert", "encoder", "mlm"]
+    },
+    {
+      "id": "constitutional-ai",
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "authors": "Anthropic",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2212.08073",
+      "tags": ["claude", "alignment", "rlhf"]
+    },
+    {
+      "id": "llama",
+      "title": "LLaMA: Open and Efficient Foundation Language Models",
+      "authors": "Touvron et al.",
+      "year": 2023,
+      "url": "https://arxiv.org/abs/2302.13971",
+      "tags": ["llama", "open-weights", "decoder"]
+    },
+    {
+      "id": "llama3",
+      "title": "Llama 3 Model Card",
+      "authors": "Meta AI",
+      "year": 2024,
+      "url": "https://github.com/meta-llama/llama3",
+      "tags": ["llama", "model-card"]
+    }
+  ],
+  "resources": [
+    { "title": "HuggingFace Transformers Docs", "url": "https://huggingface.co/docs/transformers", "tags": ["docs", "bert", "llama"] },
+    { "title": "Anthropic API Docs", "url": "https://docs.anthropic.com", "tags": ["docs", "claude"] }
+  ]
+}

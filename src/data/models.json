@@ -1,0 +1,240 @@
+{
+  "models": [
+    {
+      "id": "bert",
+      "name": "BERT",
+      "org": "Google",
+      "year": 2018,
+      "tagline": "Built to understand language, not generate it.",
+      "description": "Google's 2018 breakthrough. Still the backbone of most production NLP classification pipelines today.",
+      "architecture": {
+        "type": "Encoder-only · Bidirectional",
+        "summary": "Encoder only",
+        "specs": "Bidirectional · No generation · 512 tokens · 110M–340M params",
+        "layers": [
+          { "label": "Input embeddings", "detail": "token + position + segment", "class": "layer-embed" },
+          { "label": "Multi-head self-attention ×12", "detail": "bidirectional — sees all tokens", "class": "layer-attn" },
+          { "label": "Feed-forward network ×12", "detail": "hidden size: 3072", "class": "layer-ff" },
+          { "label": "Task head (classification / NER)", "detail": "no generation — understanding only", "class": "layer-out-bert" }
+        ],
+        "insight": "BERT reads the entire sentence at once, in both directions simultaneously. This bidirectional context makes it exceptional at understanding — but it fundamentally cannot generate new text. It has no mechanism for predicting \"what comes next.\"",
+        "parameters": "BERT-base has 12 transformer layers, 12 attention heads, and 110M parameters. BERT-large scales to 24 layers, 16 heads, and 340M parameters."
+      },
+      "training": {
+        "title": "BERT · Masked LM + Next Sentence Prediction",
+        "objective": "Fill in the blank, predict the pair",
+        "steps": [
+          { "num": "01", "title": "Masking", "text": "15% of input tokens are randomly replaced with [MASK]. The model must predict the original token using only surrounding context." },
+          { "num": "02", "title": "Bidirectional context", "text": "Because BERT sees the whole sentence at once, both left and right context inform every prediction — unlike earlier left-to-right models." },
+          { "num": "03", "title": "Next Sentence Prediction (NSP)", "text": "Given two sentences, BERT also learns to predict whether sentence B naturally follows sentence A — building paragraph-level understanding." },
+          { "num": "04", "title": "No labels needed", "text": "Both tasks are self-supervised — the labels come directly from the text itself, enabling training on billions of tokens without any human annotation." }
+        ]
+      },
+      "decision": {
+        "yes": [
+          "You need to classify, tag, or extract from text",
+          "You want a small, fast, production-ready model",
+          "You're building semantic search or embeddings",
+          "Your task is understanding, not generating"
+        ],
+        "no": [
+          "You need to generate text or have a conversation",
+          "You need long-form reasoning or complex answers"
+        ]
+      }
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "org": "Anthropic",
+      "year": 2023,
+      "tagline": "Safety-first assistant built to reason and converse.",
+      "description": "Anthropic's safety-first assistant. Built to reason, converse, and follow complex instructions — with alignment baked into its training through Constitutional AI.",
+      "architecture": {
+        "type": "Decoder · Autoregressive · Constitutional AI",
+        "summary": "Decoder + alignment",
+        "specs": "Causal · RLHF + Constitutional AI · 200K context · Proprietary",
+        "layers": [
+          { "label": "Input embeddings", "detail": "token + positional (RoPE)", "class": "layer-embed" },
+          { "label": "Causal (masked) self-attention", "detail": "each token sees only what came before", "class": "layer-mask" },
+          { "label": "Feed-forward network (deep stack)", "detail": "large hidden dimensions", "class": "layer-ff" },
+          { "label": "RLHF + Constitutional AI alignment", "detail": "trained to be helpful, harmless, honest", "class": "layer-rlhf" },
+          { "label": "Token prediction head", "detail": "generates next token, autoregressively", "class": "layer-out-claude" }
+        ],
+        "insight": "Claude is a decoder — it generates text one token at a time. What makes it distinctive isn't the base architecture (similar to GPT-style models) but the training: Constitutional AI bakes in values and safety through a self-critique process, not just human feedback labels.",
+        "parameters": "Claude uses rotary positional embeddings (RoPE) enabling up to 200K token context. Training pipeline: pretraining → SFT → RLHF → Constitutional AI critique-revision loops."
+      },
+      "training": {
+        "title": "Claude · Reinforcement Learning from Human Feedback + Constitutional AI",
+        "objective": "Learn from humans, then from principles"
+      },
+      "decision": {
+        "yes": [
+          "You need safe, reliable, long-context reasoning",
+          "You're building a product via API without hosting",
+          "Safety and alignment are critical requirements",
+          "You need complex instruction-following or analysis"
+        ],
+        "no": [
+          "You need full model access or custom fine-tuning",
+          "You have strict data-on-premise requirements"
+        ]
+      }
+    },
+    {
+      "id": "llama",
+      "name": "LLaMA",
+      "org": "Meta",
+      "year": 2023,
+      "tagline": "Open-weight foundation for the open-source LLM ecosystem.",
+      "description": "Meta's open-weight model family. The foundation of the open-source LLM ecosystem — designed to be studied, fine-tuned, and deployed privately.",
+      "architecture": {
+        "type": "Decoder-only · Open weights · Efficient",
+        "summary": "Decoder open weights",
+        "specs": "GQA · SwiGLU · RMSNorm · 128K context · 8B–405B · Fine-tunable",
+        "layers": [
+          { "label": "Token embeddings", "detail": "no learned positional — uses RoPE", "class": "layer-embed" },
+          { "label": "Grouped-query attention (GQA)", "detail": "efficient — fewer KV heads than Q heads", "class": "layer-mask" },
+          { "label": "SwiGLU feed-forward", "detail": "activation optimised for efficiency", "class": "layer-ff" },
+          { "label": "RMSNorm (pre-normalisation)", "detail": "stabilises training, replaces LayerNorm", "class": "layer-ff" },
+          { "label": "Token prediction head", "detail": "next-token generation, open for fine-tuning", "class": "layer-out-llama" }
+        ],
+        "insight": "LLaMA is architecturally similar to GPT but optimised for efficiency and open use. Grouped-query attention dramatically reduces memory during inference. SwiGLU activations improve performance. The result: competitive with much larger models at a fraction of the compute cost.",
+        "parameters": "LLaMA 3 (2024) ranges from 8B to 405B parameters. The 8B model runs on a single consumer GPU. Context window: 128K tokens. Weights are publicly released — download, inspect, modify, fine-tune on your own hardware."
+      },
+      "training": {
+        "title": "LLaMA · Next-token prediction · 15 trillion tokens",
+        "objective": "Predict what comes next, at massive scale",
+        "steps": [
+          { "num": "01", "title": "Causal LM objective", "text": "Given a sequence of tokens, predict the next one. Simple, but applied over 15 trillion tokens of diverse text — books, code, web, scientific papers." },
+          { "num": "02", "title": "Efficiency first", "text": "LLaMA was designed to be maximally capable within a given compute budget — smaller models trained on more data, informed by the Chinchilla scaling laws." },
+          { "num": "03", "title": "Open weights", "text": "Meta releases the trained weights publicly. The community fine-tunes them with instruction datasets (Alpaca, ShareGPT) to create instruction-following variants." },
+          { "num": "04", "title": "No alignment by default", "text": "Base LLaMA is a raw language model. Safety and alignment are the responsibility of whoever fine-tunes it — a deliberate choice enabling research freedom." }
+        ]
+      },
+      "decision": {
+        "yes": [
+          "You want open weights for full control",
+          "You're fine-tuning on a custom domain or dataset",
+          "Data privacy requires on-premise deployment",
+          "You're doing research or building open-source tools"
+        ],
+        "no": [
+          "You need out-of-the-box safety guarantees",
+          "You lack GPU resources for self-hosting"
+        ]
+      }
+    }
+  ],
+  "transformerPipeline": [
+    { "label": "Raw text", "detail": "\"The cat sat\"", "highlight": false },
+    { "label": "Tokenisation", "detail": "[101, 2023, …]", "highlight": false },
+    { "label": "Self-attention", "detail": "who relates to who?", "highlight": true },
+    { "label": "Feed-forward", "detail": "transform features", "highlight": false },
+    { "label": "Output", "detail": "prediction / text", "highlight": false }
+  ],
+  "guideSections": [
+    { "phase": "02 · Architecture", "value": "How", "label": "they're structurally built — encoder, decoder, attention, layers", "modelClass": "cm-bert" },
+    { "phase": "03 · Training", "value": "Why", "label": "they behave differently — masked LM, RLHF, Constitutional AI", "modelClass": "cm-claude" },
+    { "phase": "04–06 · Use", "value": "When", "label": "to reach for each — benchmarks, code, decision guide", "modelClass": "cm-llama" }
+  ],
+  "attention": {
+    "sentence": ["The", "animal", "didn't", "cross", "the", "street", "because", "it", "was", "tired"],
+    "weights": {
+      "0": [0.8,0.4,0.2,0.1,0.3,0.1,0.1,0.1,0.1,0.1],
+      "1": [0.3,0.9,0.2,0.3,0.2,0.2,0.4,0.8,0.3,0.3],
+      "2": [0.2,0.3,0.8,0.4,0.2,0.2,0.3,0.2,0.2,0.2],
+      "3": [0.1,0.3,0.3,0.9,0.2,0.4,0.3,0.2,0.2,0.2],
+      "4": [0.4,0.2,0.1,0.2,0.9,0.5,0.1,0.1,0.1,0.1],
+      "5": [0.1,0.2,0.2,0.4,0.4,0.9,0.3,0.3,0.2,0.2],
+      "6": [0.2,0.4,0.4,0.3,0.2,0.3,0.9,0.5,0.3,0.3],
+      "7": [0.2,0.9,0.3,0.2,0.2,0.3,0.4,0.9,0.4,0.5],
+      "8": [0.1,0.3,0.3,0.2,0.1,0.2,0.3,0.5,0.9,0.6],
+      "9": [0.1,0.3,0.2,0.2,0.1,0.2,0.3,0.6,0.5,0.9]
+    },
+    "insights": {
+      "0": "\"The\" attends most to itself — but also tracks the second \"the\" as a related article.",
+      "1": "\"animal\" strongly attends to \"it\" — BERT resolves this coreference by reading both left and right context simultaneously.",
+      "2": "\"didn't\" spreads its negation influence across neighboring tokens.",
+      "3": "\"cross\" attends to \"street\" (its object) and \"didn't\" (its negation).",
+      "4": "The second \"the\" groups with \"street\" — articles naturally cluster with their nouns.",
+      "5": "\"street\" attends to \"cross\" and \"the\" — it's the object of the verb phrase.",
+      "6": "\"because\" bridges both clauses, attending in both directions.",
+      "7": "\"it\" strongly attends to \"animal\" — correct pronoun resolution using full bidirectional context. A causal model might have picked \"street\" instead.",
+      "8": "\"was\" links \"it\" and \"tired\" as a copular verb.",
+      "9": "\"tired\" completes the predicate, attending to \"it\" (subject) and \"was\"."
+    }
+  },
+  "mlm": {
+    "tokens": ["The", "scientist", "discovered", "a", "new", "species", "of", "butterfly"],
+    "predictions": {
+      "0": ["The", "A", "One"],
+      "1": ["scientist", "researcher", "biologist"],
+      "2": ["discovered", "identified", "found"],
+      "3": ["a", "an", "the"],
+      "4": ["new", "rare", "unique"],
+      "5": ["species", "type", "variety"],
+      "6": ["of", "from", "among"],
+      "7": ["butterfly", "moth", "insect"]
+    }
+  },
+  "rlhfSteps": [
+    { "num": 1, "label": "Pretraining", "desc": "Train on a massive corpus of text to build general language understanding and generation capability — the same as any large language model.", "color": "bert" },
+    { "num": 2, "label": "Supervised Fine-Tuning (SFT)", "desc": "Fine-tune on human-written examples of ideal responses — helpful, harmless, honest conversations across a wide variety of tasks.", "color": "accent" },
+    { "num": 3, "label": "Reward Model Training", "desc": "Human raters compare pairs of model outputs and rank them. These preferences train a separate reward model that scores response quality.", "color": "llama" },
+    { "num": 4, "label": "Reinforcement Learning (PPO)", "desc": "Use the reward model to fine-tune the LLM via Proximal Policy Optimisation — maximising the reward signal while staying close to the SFT policy.", "color": "claude" },
+    { "num": 5, "label": "Constitutional AI (Anthropic-specific)", "desc": "The model critiques and revises its own outputs against a written set of principles — reducing reliance on human feedback for safety, and making the values transparent and auditable.", "color": "claude" }
+  ],
+  "constitutionalPrinciples": [
+    "Choose the response that is least likely to contain harmful or unethical content.",
+    "Choose the response that is most honest and acknowledges uncertainty where it exists.",
+    "Choose the response that is most helpful to the human, given that it is also safe and ethical.",
+    "Choose the response that a thoughtful senior Anthropic employee would consider most appropriate."
+  ],
+  "decisionFlow": {
+    "steps": [
+      {
+        "id": "q1",
+        "question": "What is your primary goal?",
+        "options": [
+          { "label": "Understand / classify text", "next": "r-bert" },
+          { "label": "Generate text or have a conversation", "next": "q2" },
+          { "label": "Research / build open-source product", "next": "r-llama" }
+        ]
+      },
+      {
+        "id": "q2",
+        "question": "Do you need to self-host or fine-tune on private data?",
+        "options": [
+          { "label": "Yes — full control is critical", "next": "r-llama" },
+          { "label": "No — API access is fine", "next": "r-claude" }
+        ]
+      }
+    ],
+    "results": {
+      "r-bert": {
+        "model": "BERT",
+        "colorVar": "--bert",
+        "title": "Use BERT",
+        "body": "Your task is about understanding, labelling, or extracting from text — not generating it. BERT's bidirectional encoder excels here: sentiment analysis, NER, document classification, semantic search, extractive QA. It's small, fast, and proven in production. Fine-tune a pre-trained checkpoint on HuggingFace in minutes."
+      },
+      "r-claude": {
+        "model": "Claude",
+        "colorVar": "--claude",
+        "title": "Use Claude",
+        "body": "You need high-quality generation, reasoning, or instruction-following — and you're comfortable calling an API. Claude's Constitutional AI training makes it reliable and safe out-of-the-box, with a 200K token context window ideal for long documents, code review, complex analysis, and research assistance."
+      },
+      "r-llama": {
+        "model": "LLaMA",
+        "colorVar": "--llama",
+        "title": "Use LLaMA",
+        "body": "You want open weights — the ability to inspect, fine-tune, and deploy the model entirely on your own infrastructure. LLaMA 3 (8B–405B) runs on consumer or cloud hardware. Ideal for domain-specific chatbots, RAG pipelines, research experiments, and any product where data privacy or customisation are non-negotiable."
+      }
+    }
+  },
+  "qaChips": [
+    "What makes BERT better than LLaMA for classification tasks?",
+    "How does Constitutional AI make Claude different from other LLMs?",
+    "Can I fine-tune Claude like I can fine-tune LLaMA?"
+  ]
+}
