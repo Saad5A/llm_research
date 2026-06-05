@@ -52,15 +52,7 @@ export function mountNavigation(root) {
           </ul>
         </div>
 
-        <div
-          class="nav-progress"
-          id="navProgress"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="0"
-          aria-label="Reading progress through guide sections"
-        ></div>
+        <div class="nav-progress" id="navProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Reading progress through guide sections"></div>
       </nav>
 
       <div class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></div>
@@ -110,6 +102,8 @@ export function mountNavigation(root) {
 function createMobileMenu({ header, toggle, panel }) {
   let isOpen = false;
   let lastFocus = null;
+  let touchStartY = 0;
+  let scrollCloseEnabled = false;
 
   function setA11y(open) {
     toggle.setAttribute('aria-expanded', String(open));
@@ -123,14 +117,42 @@ function createMobileMenu({ header, toggle, panel }) {
     }
   }
 
+  function bindScrollClose() {
+    window.addEventListener('wheel', onWheel, { passive: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+  }
+
+  function unbindScrollClose() {
+    window.removeEventListener('wheel', onWheel);
+    window.removeEventListener('touchstart', onTouchStart);
+    window.removeEventListener('touchmove', onTouchMove);
+  }
+
+  function onWheel() {
+    if (isOpen) close();
+  }
+
+  function onTouchStart(e) {
+    if (!isOpen) return;
+    touchStartY = e.touches[0].clientY;
+  }
+
+  function onTouchMove(e) {
+    if (!isOpen || !scrollCloseEnabled) return;
+    const dy = Math.abs(e.touches[0].clientY - touchStartY);
+    if (dy > 8) close();
+  }
+
   function open() {
     if (isOpen || !isMobileViewport()) return;
     isOpen = true;
     lastFocus = document.activeElement;
     header.classList.add('is-menu-open');
-    document.body.classList.add('is-nav-open');
     setA11y(true);
+    bindScrollClose();
     requestAnimationFrame(() => {
+      scrollCloseEnabled = true;
       panel.querySelector(FOCUSABLE)?.focus();
     });
   }
@@ -138,8 +160,9 @@ function createMobileMenu({ header, toggle, panel }) {
   function close() {
     if (!isOpen) return;
     isOpen = false;
+    scrollCloseEnabled = false;
     header.classList.remove('is-menu-open');
-    document.body.classList.remove('is-nav-open');
+    unbindScrollClose();
     if (isMobileViewport()) setA11y(false);
     if (lastFocus && typeof lastFocus.focus === 'function') {
       lastFocus.focus();

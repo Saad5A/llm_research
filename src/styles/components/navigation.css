@@ -137,15 +137,13 @@
   transform: rotate(-45deg);
 }
 
-/* ── Mobile menu panel (slide-down overlay) ── */
+/* ── Mobile menu panel (fixed below nav + breadcrumbs) ── */
 .nav-panel {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: var(--header-offset);
   left: 0;
   right: 0;
-  max-height: calc(100dvh - var(--nav-height));
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  z-index: 99;
   background: var(--color-nav-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -176,7 +174,7 @@
   gap: var(--space-xs);
   list-style: none;
   margin: 0;
-  padding: var(--space-sm) var(--nav-padding-x) var(--space-md);
+  padding: var(--space-md) var(--nav-padding-x) var(--space-md);
 }
 
 .nav-link {
@@ -249,11 +247,6 @@
 .bc-sep { margin: 0 var(--space-sm); opacity: 0.5; }
 .bc-current { color: var(--color-text); }
 
-/* ── Scroll lock (no layout shift — overlay menu only) ── */
-body.is-nav-open {
-  overflow: hidden;
-}
-
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .nav-panel,
@@ -294,10 +287,10 @@ body.is-nav-open {
 
   .nav-panel {
     position: static;
+    top: auto;
     flex: 1 1 auto;
     min-width: 0;
-    max-height: none;
-    overflow: visible;
+    z-index: auto;
     transform: none;
     opacity: 1;
     visibility: visible;
@@ -336,10 +329,6 @@ body.is-nav-open {
 
   .nav-link.active {
     box-shadow: none;
-  }
-
-  body.is-nav-open {
-    overflow: auto;
   }
 }
 
